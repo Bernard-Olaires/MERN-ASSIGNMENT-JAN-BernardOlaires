@@ -7,7 +7,7 @@ const Person = (props) => {
     const { firstName, lastName, hairColor } = props;
 
     const handleClick = () => {
-        setBirthday (inBirthday + 1)
+        setBirthday (inBirthday + 1);
     }
 
     return (
