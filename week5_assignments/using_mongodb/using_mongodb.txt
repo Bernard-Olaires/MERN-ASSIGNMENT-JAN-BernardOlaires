@@ -1,0 +1,184 @@
+
+==> Successfully started `mongodb-community@5.0` (label: homebrew.mxcl.mongodb-c
+bolairesjr@Bernards-MacBook-Air ~ % mogosh
+
+my_first_db> db.createCollection("students")
+{ ok: 1 }
+my_first_db> db.students.insert({name: 'Bernard', hpme_state: "california", lucky_number: 10, birthday: {month:12, day:14, year:1996}})   
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63e5afa189b17274d48119f6") }
+}
+my_first_db> db.students.insert({name: 'Bernard', home_state: "California", lucky_number: 10, birthday: {month:12, day:14, year:1996}})   
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63e5b19b89b17274d48119f7") }
+my_first_db> db.students.insert({name: 'Jordan',  home_state: "California", lucky_number: 7, birthday: {month:12, day:08, year:2000}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63e5b28289b17274d48119f8") }
+}
+my_first_db> db.students.insert({name: 'Patrick',  home_state: "Washington", lucky_number: 8, birthday: {month:09, day:08, year:1998}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63e5b34189b17274d48119fa") }
+}
+my_first_db> db.students.insert({name: 'Patricia',  home_state: "Washington", lucky_number: 12, birthday: {month:10, day:10, year:1992}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63e5b9b989b17274d48119fb") }
+}
+my_first_db> db.students.insert({name: 'Rocco',  home_state: "California", lucky_number: 1, birthday: {month:02, day:25, year:2016}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("63e5b9e189b17274d48119fc") }
+}
+my_first_db> db.students.find().pretty()
+[
+  {
+    _id: ObjectId("63e5b19b89b17274d48119f7"),
+    name: 'Bernard',
+    home_state: 'California',
+    lucky_number: 10,
+    birthday: { month: 12, day: 14, year: 1996 }
+  },
+  {
+    _id: ObjectId("63e5b28289b17274d48119f8"),
+    name: 'Jordan',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 12, day: 8, year: 2000 }
+  },
+  {
+    _id: ObjectId("63e5b34189b17274d48119fa"),
+    name: 'Patrick',
+    home_state: 'Washington',
+    lucky_number: 8,
+    birthday: { month: 9, day: 8, year: 1998 }
+  },
+  {
+    _id: ObjectId("63e5b9b989b17274d48119fb"),
+    name: 'Patricia',
+    home_state: 'Washington',
+    lucky_number: 12,
+    birthday: { month: 10, day: 10, year: 1992 }
+  },
+  {
+    _id: ObjectId("63e5b9e189b17274d48119fc"),
+    name: 'Rocco',
+    home_state: 'California',
+    lucky_number: 1,
+    birthday: { month: 2, day: 25, year: 2016 }
+  }
+]
+my_first_db> db.students.find({home_state: "California"})
+[
+  {
+    _id: ObjectId("63e5b19b89b17274d48119f7"),
+    name: 'Bernard',
+    home_state: 'California',
+    lucky_number: 10,
+    birthday: { month: 12, day: 14, year: 1996 }
+  },
+  {
+    _id: ObjectId("63e5b28289b17274d48119f8"),
+    name: 'Jordan',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 12, day: 8, year: 2000 }
+  },
+  {
+    _id: ObjectId("63e5b9e189b17274d48119fc"),
+    name: 'Rocco',
+    home_state: 'California',
+    lucky_number: 1,
+    birthday: { month: 2, day: 25, year: 2016 }
+  }
+]
+my_first_db> db.students.find({lucky_number: {$gt: 3}})
+[
+  {
+    _id: ObjectId("63e5b19b89b17274d48119f7"),
+    name: 'Bernard',
+    home_state: 'California',
+    lucky_number: 10,
+    birthday: { month: 12, day: 14, year: 1996 }
+  },
+  {
+    _id: ObjectId("63e5b28289b17274d48119f8"),
+    name: 'Jordan',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 12, day: 8, year: 2000 }
+  },
+  {
+    _id: ObjectId("63e5b34189b17274d48119fa"),
+    name: 'Patrick',
+    home_state: 'Washington',
+    lucky_number: 8,
+    birthday: { month: 9, day: 8, year: 1998 }
+  },
+  {
+    _id: ObjectId("63e5b9b989b17274d48119fb"),
+    name: 'Patricia',
+    home_state: 'Washington',
+    lucky_number: 12,
+    birthday: { month: 10, day: 10, year: 1992 }
+  }
+]
+my_first_db> db.students.find({lucky_number: {$lte: 10}})
+[
+  {
+    _id: ObjectId("63e5b19b89b17274d48119f7"),
+    name: 'Bernard',
+    home_state: 'California',
+    lucky_number: 10,
+    birthday: { month: 12, day: 14, year: 1996 }
+  },
+  {
+    _id: ObjectId("63e5b28289b17274d48119f8"),
+    name: 'Jordan',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 12, day: 8, year: 2000 }
+  },
+  {
+    _id: ObjectId("63e5b34189b17274d48119fa"),
+    name: 'Patrick',
+    home_state: 'Washington',
+    lucky_number: 8,
+    birthday: { month: 9, day: 8, year: 1998 }
+  },
+  {
+    _id: ObjectId("63e5b9e189b17274d48119fc"),
+    name: 'Rocco',
+    home_state: 'California',
+    lucky_number: 1,
+    birthday: { month: 2, day: 25, year: 2016 }
+  }
+]
+my_first_db> db.students.find({lucky_number: {$lte: 1}, lucky_number: {$lte: 9}})
+[
+  {
+    _id: ObjectId("63e5b28289b17274d48119f8"),
+    name: 'Jordan',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 12, day: 8, year: 2000 }
+  },
+  {
+    _id: ObjectId("63e5b34189b17274d48119fa"),
+    name: 'Patrick',
+    home_state: 'Washington',
+    lucky_number: 8,
+    birthday: { month: 9, day: 8, year: 1998 }
+  },
+  {
+    _id: ObjectId("63e5b9e189b17274d48119fc"),
+    name: 'Rocco',
+    home_state: 'California',
+    lucky_number: 1,
+    birthday: { month: 2, day: 25, year: 2016 }
+  }
+]
