@@ -3,10 +3,16 @@ import React, { useState } from 'react';
 const Form = (props) => {
 
     // getter and setter passed in App.js
-    const { boxColorArray, setBoxColorArray } = props;
+    const {boxColorArray, setBoxColorArray} = props;
 
     // creating state only for this component
-    const { color, setColor } = useState("");
+    const [color, setColor ] = useState({
+        color:''
+    });
+
+    const onChangeHandler = (e) => {
+        setColor(prevSate => {return {...prevSate, [e.target.name]: e.target.value}})
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,15 +22,16 @@ const Form = (props) => {
         setBoxColorArray( [ ...boxColorArray, color ] );
     }
 
+
     return (
         <div>
             <form onSubmit={ handleSubmit } style={{ margin: "20px" }}>
                 <div>
-                    <label htmlFor="firstName">Color</label>
+                    <label>Color</label>
                     <input 
                     type="text" 
                     name="color"
-                    onChange={ (e) => setColor(e.target.value) }
+                    onChange={onChangeHandler}
                     />
                 </div>
                 <button>Add</button>

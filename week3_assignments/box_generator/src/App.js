@@ -13,8 +13,13 @@ function App() {
   return (
     <div className="App">
 
-      <h1>Standard Assignment</h1>
-      <Form boxColorArray={ boxColorArray } setBoxColorArray={ setBoxColorArray } />
+      <h1>Pick A Color</h1>
+
+      <Form 
+      boxColorArray={boxColorArray} 
+      setBoxColorArray={setBoxColorArray} 
+      />
+
       <Display boxColorArray={ boxColorArray } />
 
     </div>
