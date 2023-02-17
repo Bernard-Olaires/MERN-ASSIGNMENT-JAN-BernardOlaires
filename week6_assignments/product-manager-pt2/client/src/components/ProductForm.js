@@ -5,27 +5,39 @@ import axios from 'axios';
 const ProductForm = (props) => {
     const {productList, setProductList} = props;
 
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+    // const [title, setTitle] = useState("");
+    // const [price, setPrice] = useState("");
+    // const [description, setDescription] = useState("");
+
+    const [product, setProduct] = useState({
+        title:'',
+        price:'',
+        description:''    
+    })
+
+    const handleInputChange = (e) => {
+        console.log(e.target.name)
+        console.log(e.target.value)
+        setProduct({...product, [e.target.name]: e.target.value})
+    }
+
+
 
     const onSubmitHandler = (e) => {
         // prevent defualt behavior of the submit
         e.preventDefault();
 
         //make a post request to create a new product
-        axios.post('http://localhost:8000/api/postProduct', {
-            title,
-            price,
-            description
-        })
+        axios.post('http://localhost:8000/api/postProduct', product)
             .then(res=>{
                 console.log(res); // always console log to get used to tracking your data!
                 console.log(res.data);
-                setProductList([...productList, res.data])
-                setTitle("");
-                setPrice("");
-                setDescription("");
+                setProductList([...productList, product])
+                setProduct({        
+                    title:'',
+                    price:'',
+                    description:'' 
+                })
             })
             .catch(err=>console.log(err))
     }
@@ -34,15 +46,15 @@ const ProductForm = (props) => {
         <form onSubmit={onSubmitHandler} className="form-style">
             <div>
                 <label>Title:</label>
-                <input type="text" onChange = {(e)=>setTitle(e.target.value)}/>
+                <input type="text" onChange={handleInputChange} value={product.title} name='title'/>
             </div>
             <div>
                 <label>Price:</label>
-                <input type="number" onChange = {(e)=>setPrice(e.target.value)}/>
+                <input type="number" onChange={handleInputChange} value={product.price} name='price'/>
             </div>
             <div>
                 <label>Description:</label>
-                <input type="text" onChange = {(e)=>setDescription(e.target.value)}/>
+                <input type="text" onChange={handleInputChange} value={product.description} name='description'/>
             </div>
             <input type="submit" className='submit-button'/>
         </form>
