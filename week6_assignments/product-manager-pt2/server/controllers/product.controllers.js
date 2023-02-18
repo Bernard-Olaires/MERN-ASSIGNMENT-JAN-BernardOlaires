@@ -9,7 +9,7 @@ module.exports = {
                 res.json(allProducts)
             })
             .catch((err) => {
-                res.status(500).json({message: 'Something went wrong', error:err})
+                res.status(500).json(err)
             })
     },
     getProductById: (req,res) => {
@@ -28,7 +28,7 @@ module.exports = {
                 res.json(newProduct)
             })
             .catch((err) => {
-                res.status(500).json({message: 'Something went wrong', error:err})
+                res.status(500).json(err)
             })
     },
     updateProduct: (req,res) => {

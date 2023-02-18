@@ -14,10 +14,6 @@ function App() {
         <Route path='/' element={<Main/>} />
         <Route path='/oneProduct/:id' element={<ProductShowOne/>} />
       </Routes>
-
-      
-
-    
     </div>
     </BrowserRouter>
   );
