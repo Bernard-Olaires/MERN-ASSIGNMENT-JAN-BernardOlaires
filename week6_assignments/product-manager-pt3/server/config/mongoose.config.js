@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// change db when needed
 mongoose.connect('mongodb://127.0.0.1:27017/ProductManagerStorage', {
     useNewUrlParser: true,
     useUnifiedTopology: true

@@ -1,4 +1,3 @@
-const { response } = require('express');
 const Product = require('../models/product.model');
 
 module.exports = {
@@ -28,7 +27,7 @@ module.exports = {
                 res.json(newProduct)
             })
             .catch((err) => {
-                res.status(500).json(err)
+                res.statusPe(500).json(err)
             })
     },
     updateProduct: (req,res) => {
